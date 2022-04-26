@@ -12,10 +12,7 @@ const PokemonProvider = props => {
 	}
 
 	useEffect(() => {
-		const getPokemons = async (
-			url = 'https://pokeapi.co/api/v2/pokemon/?limit=20&offset=0',
-		) => {
-			console.log(url)
+		async function getPokemons(url) {
 			const {
 				data: { results, next },
 			} = await axios(url)
@@ -23,10 +20,11 @@ const PokemonProvider = props => {
 				results.map(e => getPokemonsDetails(e.url)),
 			)
 			// console.log(pokemons)
-			setPokemons([...pokemons, pokemonsFound])
+			setPokemons(...pokemons, pokemonsFound)
+			console.log(pokemons)
 			// if (next) getPokemons(next)
 		}
-		getPokemons()
+		getPokemons('https://pokeapi.co/api/v2/pokemon/?limit=114&offset=0')
 	}, [])
 
 	return (

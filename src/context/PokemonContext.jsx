@@ -1,10 +1,12 @@
 import axios from 'axios'
 import { createContext, useEffect, useState } from 'react'
+// import pokemonsStored from '../helpers/pokemons'
 
 export const PokemonContext = createContext()
 
 const PokemonProvider = props => {
 	const [pokemons, setPokemons] = useState([])
+	const [loading, setLoading] = useState(0)
 
 	const getPokemonsDetails = async url => {
 		const { data } = await axios(url)
@@ -12,6 +14,7 @@ const PokemonProvider = props => {
 	}
 
 	useEffect(() => {
+		let pk = []
 		async function getPokemons(url) {
 			const {
 				data: { results, next },
@@ -19,16 +22,22 @@ const PokemonProvider = props => {
 			const pokemonsFound = await Promise.all(
 				results.map(e => getPokemonsDetails(e.url)),
 			)
-			// console.log(pokemons)
-			setPokemons(...pokemons, pokemonsFound)
-			console.log(pokemons)
-			// if (next) getPokemons(next)
+			pk = pk.concat(pokemonsFound)
+			setLoading(pk.length / 11.4)
+			if (next) await getPokemons(next)
+			else {
+				setPokemons(pk)
+				setLoading(100)
+			}
 		}
 		getPokemons('https://pokeapi.co/api/v2/pokemon/?limit=114&offset=0')
+
+		// setPokemons(pokemonsStored)
+		// setLoading(false)
 	}, [])
 
 	return (
-		<PokemonContext.Provider value={{ pokemons }}>
+		<PokemonContext.Provider value={{ pokemons, loading }}>
 			{props.children}
 		</PokemonContext.Provider>
 	)

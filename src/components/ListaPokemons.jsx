@@ -3,14 +3,20 @@ import { PokemonContext } from '../context/PokemonContext'
 import MuestraPokemon from './MuestraPokemon'
 
 const ListaPokemons = () => {
-	const { pokemons } = useContext(PokemonContext)
+	const { pokemons, loading } = useContext(PokemonContext)
 
 	return (
-		<div className='row mt-5'>
-			{pokemons.map(pokemon => (
-				<MuestraPokemon key={pokemon.id} pokemon={pokemon} />
-			))}
-		</div>
+		<>
+			{loading != 100 ? (
+				<h1>Cargando {loading}%</h1>
+			) : (
+				<div className='row mt-5'>
+					{pokemons?.map(pokemon => (
+						<MuestraPokemon key={pokemon.id} pokemon={pokemon} />
+					))}
+				</div>
+			)}
+		</>
 	)
 }
 

@@ -1,6 +1,5 @@
 import axios from 'axios'
 import { createContext, useEffect, useState } from 'react'
-// import pokemonsStored from '../helpers/pokemons'
 
 export const PokemonContext = createContext()
 
@@ -31,9 +30,6 @@ const PokemonProvider = props => {
 			}
 		}
 		getPokemons('https://pokeapi.co/api/v2/pokemon/?limit=114&offset=0')
-
-		// setPokemons(pokemonsStored)
-		// setLoading(false)
 	}, [])
 
 	return (

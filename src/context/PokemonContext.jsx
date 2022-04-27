@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { createContext, useEffect, useState } from 'react'
+import Pokemon from '../entities/pokemon'
 
 export const PokemonContext = createContext()
 
@@ -9,7 +10,7 @@ const PokemonProvider = props => {
 
 	const getPokemonsDetails = async url => {
 		const { data } = await axios(url)
-		return data
+		return new Pokemon(data)
 	}
 
 	useEffect(() => {

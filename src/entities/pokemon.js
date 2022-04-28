@@ -1,4 +1,5 @@
 class Pokemon {
+	id
 	name
 	imageURL
 	height
@@ -6,6 +7,7 @@ class Pokemon {
 	species
 
 	constructor(apiData) {
+		this.id = apiData.id
 		this.name = apiData.name
 		this.imageURL = apiData.sprites?.other['official-artwork'].front_default
 		this.height = apiData.height

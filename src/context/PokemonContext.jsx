@@ -5,6 +5,7 @@ import Pokemon from '../entities/pokemon'
 export const PokemonContext = createContext()
 
 const PokemonProvider = props => {
+	console.log('Carga PokemonProvider')
 	const [pokemons, setPokemons] = useState([])
 	const [loading, setLoading] = useState(0)
 
@@ -14,6 +15,7 @@ const PokemonProvider = props => {
 	}
 
 	useEffect(() => {
+		console.log('useEffect PokemonProvider')
 		let pk = []
 		async function getPokemons(url) {
 			const {
@@ -24,9 +26,13 @@ const PokemonProvider = props => {
 			)
 			pk = pk.concat(pokemonsFound)
 			setLoading(pk.length / 11.4)
+			console.log(
+				`setLoading ${pk.length / 11.4} por ${pk.length} pokemons leídos`,
+			)
 			if (next) await getPokemons(next)
 			else {
 				setPokemons(pk)
+				console.log('setPokemons')
 				setLoading(100)
 			}
 		}

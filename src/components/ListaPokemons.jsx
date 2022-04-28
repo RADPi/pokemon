@@ -3,6 +3,7 @@ import { PokemonContext } from '../context/PokemonContext'
 import MuestraPokemon from './MuestraPokemon'
 
 const ListaPokemons = () => {
+	console.log('Carga ListaPokemons')
 	const { pokemons, loading } = useContext(PokemonContext)
 
 	return (

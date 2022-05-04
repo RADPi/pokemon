@@ -6,12 +6,11 @@ const FiltroSpecies = () => {
 	const { pokemons } = useContext(PokemonContext)
 
 	const speciesFilter = pokemons => {
-		const resp = []
-		for (var i = 0, l = pokemons.length; i < l; i++) {
-			const { species } = pokemons[i]
-			if (resp.indexOf(species) === -1 && species !== '') resp.push(species)
-		}
-		return resp
+		const resp = new Set()
+		pokemons.forEach(e => {
+			resp.add(e.species)
+		})
+		return [...resp]
 	}
 
 	useEffect(() => {

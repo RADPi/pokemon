@@ -5,7 +5,7 @@ import FiltroSpecies from './components/FiltroSpecies'
 import Layout from './components/Layout'
 import ListaPokemons from './components/ListaPokemons'
 import Login from './components/Login'
-import AuthProvider from './context/AuthContext'
+import { AuthProvider } from './context/AuthContext'
 import PokemonProvider from './context/PokemonContext'
 
 function App() {

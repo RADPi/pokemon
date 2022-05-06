@@ -7,6 +7,8 @@ import ListaPokemons from './components/ListaPokemons'
 import Login from './components/Login'
 import { AuthProvider } from './context/AuthContext'
 import PokemonProvider from './context/PokemonContext'
+import ProtectedRoutes from './routes/ProtectedRoutes'
+import PublicRoute from './routes/PublicRoute'
 
 function App() {
 	return (
@@ -14,8 +16,22 @@ function App() {
 			<Routes>
 				<Route path='/' element={<Layout />}>
 					<Route index element={<h1>Home</h1>} />
-					<Route path='login' element={<Login />} />
-					<Route path='pokemons' element={<div>Inicio</div>} />
+					<Route
+						path='login'
+						element={
+							<PublicRoute>
+								<Login />
+							</PublicRoute>
+						}
+					/>
+					<Route
+						path='*'
+						element={
+							<ProtectedRoutes>
+								<Route path='pokemons' element={<div>Pokemons</div>} />
+							</ProtectedRoutes>
+						}
+					/>
 				</Route>
 			</Routes>
 		</AuthProvider>

@@ -1,14 +1,18 @@
 import React from 'react'
-import { Formik, Form, Field, ErrorMessage } from 'formik'
+import { Formik, Form, Field, ErrorMessage, replace } from 'formik'
 import useAuth from '../hooks/useAuth'
 import { actionLogin } from '../auth/authReducer'
+import { useNavigate } from 'react-router-dom'
 
 const Login = () => {
 	const { authState, dispatch } = useAuth()
+	const navigate = useNavigate()
 
 	const handleSubmit = values => {
 		actionLogin(values, dispatch)
+		navigate('/pokemons', { replace: true })
 	}
+
 	return (
 		<div className='container'>
 			<div className='card col-md-6 mx-auto mt-4 p-4'>

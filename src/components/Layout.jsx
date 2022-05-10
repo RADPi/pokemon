@@ -2,8 +2,8 @@ import { Link, Outlet } from 'react-router-dom'
 import useAuth from '../hooks/useAuth'
 
 const Layout = () => {
-	const { authState, dispatch } = useAuth()
-	console.log(authState)
+	const { state } = useAuth()
+	console.log(state)
 
 	return (
 		<div>

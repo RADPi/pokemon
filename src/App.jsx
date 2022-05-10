@@ -5,7 +5,7 @@ import FiltroSpecies from './components/FiltroSpecies'
 import Layout from './components/Layout'
 import ListaPokemons from './components/ListaPokemons'
 import Login from './components/Login'
-import { AuthProvider } from './context/AuthContext'
+import { AuthProvider } from './auth/authContext'
 import PokemonProvider from './context/PokemonContext'
 import ProtectedRoutes from './routes/ProtectedRoutes'
 import PublicRoute from './routes/PublicRoute'
@@ -28,17 +28,24 @@ function App() {
 						path='*'
 						element={
 							<ProtectedRoutes>
-								<Route path='pokemons' element={<div>Pokemons</div>} />
+								<Routes>
+									<Route
+										path='pokemons'
+										element={
+											// <PokemonProvider>
+											// 	<FiltroSpecies />
+											// 	<ListaPokemons />
+											// </PokemonProvider>
+											<h1 className='text-center'>Lista Pokemons</h1>
+										}
+									/>
+								</Routes>
 							</ProtectedRoutes>
 						}
 					/>
 				</Route>
 			</Routes>
 		</AuthProvider>
-		// <PokemonProvider>
-		// 	<FiltroSpecies />
-		// 	<ListaPokemons />
-		// </PokemonProvider>
 	)
 }
 

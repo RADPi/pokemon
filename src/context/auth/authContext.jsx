@@ -1,10 +1,10 @@
 import { createContext, useEffect, useReducer, useState } from 'react'
 import { authReducer } from './authReducer'
-import { types } from '../types/types'
+import { types } from '../../types'
 
-const AuthContext = createContext()
+export const AuthContext = createContext()
 
-export const AuthProvider = ({ children }) => {
+const AuthProvider = ({ children }) => {
 	const initialState = {
 		isAuthenticated: false,
 		user: null,
@@ -18,11 +18,17 @@ export const AuthProvider = ({ children }) => {
 		})
 	}
 
+	const actionLogout = user => {
+		dispatch({
+			type: types.LOGOUT,
+		})
+	}
+
 	return (
-		<AuthContext.Provider value={{ state, actionLogin }}>
+		<AuthContext.Provider value={{ state, actionLogin, actionLogout }}>
 			{children}
 		</AuthContext.Provider>
 	)
 }
 
-export default AuthContext
+export default AuthProvider

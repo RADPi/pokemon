@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react'
-import { PokemonContext } from '../context/PokemonContext'
+import { PokemonContext } from '../context/pokemons/pokemonContext'
 
 const FiltroSpecies = () => {
 	console.log('Carga FiltroSpecies')
